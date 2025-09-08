@@ -254,6 +254,7 @@
       display: flex;
       flex-direction: column;
       gap: 15px;
+      position: relative;
     }
     
     .about-text {
@@ -290,6 +291,116 @@
       color: #6c757d;
     }
     
+    /* Services Section */
+    .services-section {
+      margin-top: 30px;
+    }
+    
+    .service-item {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+    
+    .service-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .service-icon {
+      font-size: 40px;
+      color: #3498DB;
+      margin-bottom: 15px;
+    }
+    
+    .service-title {
+      font-weight: 700;
+      color: #2C3E50;
+      margin-bottom: 10px;
+    }
+    
+    /* Products Section */
+    .products-section {
+      margin-top: 30px;
+    }
+    
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .product-image {
+      height: 160px;
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #3498DB;
+      font-size: 50px;
+    }
+    
+    .product-content {
+      padding: 20px;
+    }
+    
+    .product-title {
+      font-weight: 700;
+      color: #2C3E50;
+      margin-bottom: 10px;
+    }
+    
+    /* Gallery Section */
+    .gallery-section {
+      margin-top: 30px;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .gallery-item {
+      border-radius: 10px;
+      overflow: hidden;
+      height: 150px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover {
+      transform: scale(1.05);
+    }
+    
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Modal for gallery */
+    .modal-content {
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    
     @media (max-width: 768px) {
       .business-card {
         margin: 20px;
@@ -305,6 +416,11 @@
       
       .stats-container {
         flex-direction: column;
+      }
+      
+      .product-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -326,6 +442,15 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#products">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#gallery">Gallery</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
@@ -453,6 +578,133 @@
           </div>
         </div>
 
+        <!-- Services Section -->
+        <div class="services-section" id="services">
+          <h5 class="section-title">Our Services</h5>
+          
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <h6 class="service-title">SEO Optimization</h6>
+            <p class="service-description">
+              Improve your website's visibility and rank higher on search engines with our comprehensive SEO services. 
+              We use white-hat techniques to drive organic traffic to your site.
+            </p>
+          </div>
+          
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <h6 class="service-title">Social Media Marketing</h6>
+            <p class="service-description">
+              Engage your audience across all social platforms effectively. We create and manage campaigns that 
+              increase brand awareness and drive conversions.
+            </p>
+          </div>
+          
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fas fa-ad"></i>
+            </div>
+            <h6 class="service-title">PPC Advertising</h6>
+            <p class="service-description">
+              Get immediate results with our targeted pay-per-click advertising campaigns. We optimize for maximum 
+              ROI and conversion rates.
+            </p>
+          </div>
+          
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fas fa-pencil-alt"></i>
+            </div>
+            <h6 class="service-title">Content Marketing</h6>
+            <p class="service-description">
+              Create valuable and consistent content to attract and retain customers. Our content strategies 
+              establish your brand as an industry authority.
+            </p>
+          </div>
+        </div>
+
+        <!-- Products Section -->
+        <div class="products-section" id="products">
+          <h5 class="section-title">Our Products</h5>
+          
+          <div class="product-grid">
+            <div class="product-card">
+              <div class="product-image">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="product-content">
+                <h6 class="product-title">Marketing Dashboard</h6>
+                <p>A powerful tool to track and optimize your campaigns with real-time analytics.</p>
+              </div>
+            </div>
+            
+            <div class="product-card">
+              <div class="product-image">
+                <i class="fas fa-chart-pie"></i>
+              </div>
+              <div class="product-content">
+                <h6 class="product-title">Analytics Suite</h6>
+                <p>Gain insights with comprehensive business intelligence and data visualization.</p>
+              </div>
+            </div>
+            
+            <div class="product-card">
+              <div class="product-image">
+                <i class="fas fa-paint-brush"></i>
+              </div>
+              <div class="product-content">
+                <h6 class="product-title">Brand Toolkit</h6>
+                <p>Everything you need to build and manage your brand identity across all platforms.</p>
+              </div>
+            </div>
+            
+            <div class="product-card">
+              <div class="product-image">
+                <i class="fas fa-bullhorn"></i>
+              </div>
+              <div class="product-content">
+                <h6 class="product-title">Campaign Manager</h6>
+                <p>Plan, execute, and track marketing campaigns from a single platform.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div class="gallery-section" id="gallery">
+          <h5 class="section-title">Our Gallery</h5>
+          
+          <div class="gallery-grid">
+            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" onclick="openGalleryImage(this)">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="gallery-image" alt="Digital Marketing Workshop">
+            </div>
+            
+            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" onclick="openGalleryImage(this)">
+              <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="gallery-image" alt="Team Meeting">
+            </div>
+            
+            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" onclick="openGalleryImage(this)">
+              <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="gallery-image" alt="Client Presentation">
+            </div>
+            
+            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" onclick="openGalleryImage(this)">
+              <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="gallery-image" alt="Office Environment">
+            </div>
+            
+            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" onclick="openGalleryImage(this)">
+              <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="gallery-image" alt="Web Development">
+            </div>
+            
+            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" onclick="openGalleryImage(this)">
+              <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="gallery-image" alt="Coding Session">
+            </div>
+          </div>
+        </div>
+
         <!-- Business Hours Section -->
         <div class="business-hours-section mt-5" id="hours">
           <h5 class="section-title">Business Hours</h5>
@@ -521,6 +773,21 @@
     </div>
   </div>
 
+  <!-- Gallery Modal -->
+  <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="galleryModalLabel">Image Preview</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img id="modalGalleryImage" src="" class="img-fluid rounded" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
@@ -575,6 +842,12 @@
         });
       });
     });
+    
+    // Gallery modal function
+    function openGalleryImage(element) {
+      const imageSrc = element.querySelector('img').src;
+      document.getElementById('modalGalleryImage').src = imageSrc;
+    }
   </script>
 </body>
 </html>
