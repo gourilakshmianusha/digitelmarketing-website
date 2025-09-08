@@ -1,320 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>VBizCard — Digital Marketing</title>
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VBizCard - Professional Business Card</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- QRCodeJS -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <style>
-    :root {
-      --primary: #6C4AB6;
-      --secondary: #8D72E1;
-      --accent: #FF9B9B;
-      --text-dark: #333;
-      --bg-gradient: linear-gradient(135deg, var(--secondary), var(--primary));
-      --card-bg: #fff;
-      --shadow: rgba(0,0,0,0.15);
-    }
-
     body {
-      margin:0;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: var(--bg-gradient);
-      font-family:'Poppins',sans-serif;
-      color: var(--text-dark);
+      background: linear-gradient(135deg, #3498DB 0%, #2C3E50 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: 'Poppins', sans-serif;
     }
-
     .business-card {
-      background: var(--card-bg);
-      border-radius:16px;
-      box-shadow:0 12px 30px var(--shadow);
-      overflow:hidden;
-      max-width:1000px;
-      width:100%;
-      display:flex;
-      flex-wrap:wrap;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      overflow: hidden;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-
     .card-left {
-      flex:1 1 300px;
-      background: var(--bg-gradient);
-      color:white;
-      padding:35px;
-      text-align:center;
+      background: linear-gradient(135deg, #2C3E50, #3498DB);
+      color: white;
+      padding: 30px;
+      text-align: center;
     }
-
+    .logo {
+      font-weight: 700;
+      font-size: 28px;
+      margin-bottom: 20px;
+      padding: 8px 20px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+    }
     .profile-img {
-      width:140px;
-      height:140px;
-      margin:0 auto 20px;
-      border-radius:50%;
-      border:5px solid rgba(255,255,255,0.3);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#fff;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 5px solid rgba(255,255,255,0.3);
+      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(45deg, #3498DB, #2C3E50);
     }
-
-    .profile-img i {
-      font-size:65px;
-      color: var(--primary);
+    .profile-img i { font-size: 70px; color: white; }
+    .card-right { padding: 30px; background: #F9F9F9; }
+    .name { font-weight: 700; font-size: 32px; color:#2C3E50; }
+    .title { color: #3498DB; font-weight: 600; margin-bottom: 20px; }
+    .contact-item { display: flex; align-items:center; margin-bottom:15px; padding:10px; background:#fff; border-radius:8px; box-shadow:0 3px 10px rgba(0,0,0,0.05); }
+    .contact-icon { width:40px; height:40px; border-radius:50%; background:#eee; display:flex; align-items:center; justify-content:center; margin-right:10px; color:#2C3E50; }
+    .qr-code { background:white; padding:10px; border-radius:10px; margin:20px auto; display:inline-block; }
+    .document-section, .gallery-section, .map-section { margin-top:30px; }
+    .document-item { display:flex; align-items:center; justify-content:space-between; background:white; padding:15px; border-radius:10px; margin-bottom:15px; box-shadow:0 5px 15px rgba(0,0,0,0.05); }
+    .view-btn { background:#3498DB; color:white; border:none; padding:8px 15px; border-radius:5px; font-size:12px; transition: all 0.3s; }
+    .view-btn:hover { background:#2C3E50; transform: translateY(-2px); }
+    .gallery-img { width:100%; border-radius:10px; transition:0.3s; cursor:pointer; height: 150px; object-fit: cover; }
+    .gallery-img:hover { transform:scale(1.05); }
+    .payment-methods img { width:60px; margin:10px; }
+    .map-container { 
+      border-radius: 10px; 
+      overflow: hidden; 
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      height: 250px;
     }
-
-    .card-right {
-      flex:2 1 500px;
-      padding:35px;
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
-
-    .name {
-      font-size:26px;
-      font-weight:bold;
-      color:var(--primary);
-      margin:0;
-      word-break: break-word;
-    }
-
-    .title {
-      color: var(--accent);
-      font-size:18px;
-      font-weight:600;
-      margin-bottom:15px;
-    }
-
-    .contact-info p, .contact-info a {
-      margin-bottom:8px;
-      font-size:15px;
-      color: var(--text-dark);
-      text-decoration:none;
-      word-break: break-word;
-    }
-
-    .contact-info i {
-      margin-right:8px;
-      color: var(--primary);
-    }
-
-    .qr-code {
-      margin:20px 0;
-      display:block;
-      width: fit-content;
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    .qr-code img {
-      max-width:200px;
-      width:100%;
-      border-radius:10px;
-      box-shadow:0 6px 12px var(--shadow);
-    }
-
-    .payment-section {
-      margin:25px 0;
-      text-align:center;
-    }
-
-    .payment-section h5 {
-      margin-bottom:12px;
-    }
-
-    .payment-icons {
-      display:flex;
-      justify-content:left;
-      align-items:center;
-      gap:16px;
-      flex-wrap: wrap;
-    }
-
-    .payment-icons i {
-      font-size:36px;
-      color: var(--primary);
-      transition: transform 0.2s, color 0.2s;
-    }
-
-    .payment-icons i.amex-card {
-      font-size:44px;
-    }
-
-    .payment-icons i:hover {
-      transform: scale(1.2);
-      color: var(--accent);
-    }
-
-    .social-icons {
-      margin-top:20px;
-      display:flex;
-      justify-content:flex-start;
-      flex-wrap: wrap;
-    }
-
-    .social-icons a {
-      font-size:28px;
-      margin-right:15px;
-      color: var(--primary);
-      transition: color 0.3s, transform 0.2s;
-    }
-
-    .social-icons a:hover {
-      color: var(--accent);
-      transform: scale(1.2);
-    }
-
-    /* About Us Section */
-    .about-us {
-      margin-top:25px;
-    }
-    .about-us p {
-      display: none;
-      margin-top:10px;
-      line-height:1.5;
-    }
-    .about-us p.show {
-      display: block;
-    }
-    .btn-view-more {
-      margin-top:10px;
-      background: var(--primary);
-      color: #fff;
-      border:none;
-      padding:6px 12px;
-      border-radius:6px;
-      cursor:pointer;
-      transition: 0.3s;
-    }
-    .btn-view-more:hover {
-      background: var(--accent);
-      color:white;
-    }
-
-    /* Additional Info Section */
-    .additional-info {
-      margin-top:20px;
-      background:#f5f5f5;
-      padding:15px;
-      border-radius:10px;
-      line-height:1.5;
-    }
-
-    @media(max-width:768px) {
-      .business-card {
-        flex-direction:column;
-      }
-      .card-left, .card-right {
-        flex:unset;
-        width:100%;
-      }
-      .profile-img {
-        width:120px;
-        height:120px;
-      }
-      .qr-code {
-        width:180px;
-        margin:auto;
-      }
-      .social-icons {
-        justify-content:center;
-      }
+    .section-title {
+      font-weight: 700;
+      color: #2C3E50;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #3498DB;
     }
   </style>
 </head>
 <body>
-  <div class="business-card">
-    <!-- LEFT SIDE -->
-    <div class="card-left">
-      <div class="logo h4 fw-bold">VBizCard</div>
-      <div class="profile-img"><i class="fas fa-user-tie"></i></div>
-      <h3 class="name">John Anderson</h3>
-      <p class="title">Senior Business Consultant</p>
-      <div class="qr-code" id="qrcode"></div>
-      <p class="small mt-2">Scan to visit my website</p>
-    </div>
+  <div class="business-card container-fluid p-0">
+    <div class="row g-0">
+      <!-- LEFT SIDE -->
+      <div class="card-left col-md-4">
+        <div class="logo">VBIZCARD</div>
+        <div class="profile-img"><i class="fas fa-user-tie"></i></div>
+        <h2>John Anderson</h2>
+        <p>Senior Business Consultant</p>
 
-    <!-- RIGHT SIDE -->
-    <div class="card-right">
-      <h3 class="name">John Anderson</h3>
-      <p class="title">Senior Business Consultant</p>
-      <p>Helping companies grow revenue and expand market presence for 10+ years.</p>
-      
-      <!-- About Us Section -->
-      <div class="about-us">
-        <h5>About Us</h5>
-        <p id="about-text">
-          We are a digital marketing agency specializing in SEO, social media management, content marketing, and online branding. Our team of experts works closely with clients to increase visibility, drive traffic, and maximize ROI. We have successfully managed campaigns for startups, SMEs, and large enterprises.
-        </p>
-        <button class="btn-view-more" onclick="toggleAbout()">View More</button>
-      </div>
+        <!-- QR Code -->
+        <div class="qr-code" id="qrcode"></div>
+        <p>Scan to visit my website</p>
 
-      <!-- Additional Info Section -->
-      <div class="additional-info">
-        <h6>Our Services & Achievements</h6>
-        <p>
-          • SEO Optimization for top rankings<br>
-          • Social Media Strategy and Management<br>
-          • Content Marketing & Copywriting<br>
-          • Paid Ad Campaigns (Google Ads, Facebook Ads)<br>
-          • Awarded Best Digital Marketing Agency 2023
-        </p>
-      </div>
+        <!-- Social Icons -->
+        <div class="social-icons d-flex justify-content-center gap-3 mt-3">
+          <a href="#"><i class="fab fa-facebook-f text-white fa-lg"></i></a>
+          <a href="#"><i class="fab fa-twitter text-white fa-lg"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in text-white fa-lg"></i></a>
+          <a href="#"><i class="fab fa-instagram text-white fa-lg"></i></a>
+        </div>
 
-      <div class="contact-info">
-        <p><i class="fas fa-phone"></i>+91 9035066863</p>
-        <p><i class="fas fa-envelope"></i><a href="mailto:john.anderson@vbizcard.com">john.anderson@vbizcard.com</a></p>
-        <p><i class="fas fa-globe"></i>
-          <a href="https://digitalmarketingwebsite-chi.vercel.app" target="_blank">digitalmarketingwebsite-chi.vercel.app</a>
-        </p>
-      </div>
-
-      <div class="payment-section">
-        <h5>Accepted Payment Methods</h5>
-        <div class="payment-icons">
-          <i class="fab fa-cc-visa"></i>
-          <i class="fab fa-cc-mastercard"></i>
-        
-          <i class="fab fa-cc-paypal"></i>
+        <!-- Payment Methods -->
+        <div class="payment-methods mt-4">
+          <h6 class="fw-bold">Accepted Payments</h6>
+          <div class="d-flex justify-content-center flex-wrap">
+            <img src="https://img.icons8.com/color/96/000000/visa.png" alt="Visa">
+            <img src="https://img.icons8.com/color/96/000000/mastercard.png" alt="MasterCard">
+            <img src="https://img.icons8.com/color/96/000000/amex.png" alt="Amex">
+            <img src="https://img.icons8.com/color/96/000000/paypal.png" alt="PayPal">
+          </div>
         </div>
       </div>
 
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="https://wa.me/919035066863" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <!-- RIGHT SIDE -->
+      <div class="card-right col-md-8">
+        <h1 class="name">John Anderson</h1>
+        <p class="title">Senior Business Consultant</p>
+        <p>Helping companies grow revenue and expand market presence for 10+ years.</p>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div>+91 9035066863</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div>john.anderson@vbizcard.com</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-globe"></i></div>
+            <div><a href="https://vbizcard.in" target="_blank">vbizcard.in</a></div>
+          </div>
+        </div>
+
+        <!-- Documents -->
+        <div class="document-section">
+          <h5 class="section-title">Business Documents</h5>
+          <div class="document-item">
+            <span><i class="fas fa-file-pdf text-danger me-2"></i> Company Profile</span>
+            <button class="view-btn" onclick="openPdf('https://file-examples.com/storage/fe42043ddc68bdea5933232/2017/10/file-sample_150kB.pdf')">View</button>
+          </div>
+          <div class="document-item">
+            <span><i class="fas fa-file-contract text-primary me-2"></i> Service Agreement</span>
+            <button class="view-btn" onclick="openPdf('https://file-examples.com/storage/fe42043ddc68bdea5933232/2017/10/file-sample_150kB.pdf')">View</button>
+          </div>
+          <div class="document-item">
+            <span><i class="fas fa-chart-line text-success me-2"></i> Case Studies</span>
+            <button class="view-btn" onclick="openPdf('https://file-examples.com/storage/fe42043ddc68bdea5933232/2017/10/file-sample_150kB.pdf')">View</button>
+          </div>
+        </div>
+
+        <!-- Gallery -->
+        <div class="gallery-section">
+          <h5 class="section-title">Gallery</h5>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="gallery-img" onclick="openImage(this.src)">
+            </div>
+            <div class="col-md-4">
+              <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="gallery-img" onclick="openImage(this.src)">
+            </div>
+            <div class="col-md-4">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="gallery-img" onclick="openImage(this.src)">
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Maps -->
+        <div class="map-section">
+          <h5 class="section-title">Our Location</h5>
+          <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.314239382693!2d78.4481893148772!3d17.44582058804502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb90d35c2b8cbf%3A0x5f5cd703acb16d6a!2sHitech%20City%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1679299907716!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- QR Code JS -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <!-- PDF Modal -->
+  <div class="modal fade" id="pdfModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Document Viewer</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-0">
+          <iframe id="pdfViewer" src="" width="100%" height="600px" style="border:none;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Modal -->
+  <div class="modal fade" id="imageModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Image Preview</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-0 text-center">
+          <img id="modalImage" src="" class="img-fluid rounded">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const siteUrl = "https://digitalmarketingwebsite-chi.vercel.app";
-
     // Generate QR code
-    new QRCode(document.getElementById("qrcode"), {
-      text: siteUrl,
-      width: 200,
-      height: 200,
-      correctLevel: QRCode.CorrectLevel.H
+    document.addEventListener('DOMContentLoaded', function() {
+      new QRCode(document.getElementById("qrcode"), {
+        text: "https://vbizcard.in",
+        width: 120,
+        height: 120
+      });
     });
 
-    // Override all old links
-    document.querySelectorAll('a').forEach(a => {
-      if(a.href.includes('vbizcard.in')) {
-        a.href = siteUrl;
-        a.target = "_blank";
-      }
-    });
+    // PDF Modal
+    function openPdf(url) {
+      // Use Google Docs viewer for better compatibility
+      const googleDocsViewer = 'https://docs.google.com/gview?embedded=true&url=';
+      document.getElementById("pdfViewer").src = googleDocsViewer + encodeURIComponent(url);
+      let pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
+      pdfModal.show();
+    }
 
-    // Toggle About Us text
-    function toggleAbout() {
-      const aboutText = document.getElementById("about-text");
-      aboutText.classList.toggle("show");
+    // Image Modal
+    function openImage(src) {
+      document.getElementById("modalImage").src = src;
+      let imgModal = new bootstrap.Modal(document.getElementById('imageModal'));
+      imgModal.show();
     }
   </script>
 </body>
