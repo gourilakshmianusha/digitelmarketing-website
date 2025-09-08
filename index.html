@@ -3,35 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VBizCard - Professional Business Card</title>
+  <title>Digitel Pro - Professional Business Card</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- QRCodeJS -->
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <style>
     body {
       background: linear-gradient(135deg, #3498DB 0%, #2C3E50 100%);
+      font-family: 'Poppins', sans-serif;
+      padding-top: 70px; /* Space for fixed navbar */
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      font-family: 'Poppins', sans-serif;
     }
+    
+    /* Navigation Bar */
+    .navbar {
+      background: rgba(44, 62, 80, 0.95);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      padding: 12px 0;
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 22px;
+      color: white !important;
+    }
+    
+    .navbar-nav .nav-link {
+      color: rgba(255, 255, 255, 0.85) !important;
+      font-weight: 500;
+      padding: 8px 15px;
+      margin: 0 5px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: white !important;
+      background: rgba(52, 152, 219, 0.2);
+    }
+    
+    .navbar-toggler {
+      border: none;
+      color: white !important;
+    }
+    
     .business-card {
       background: white;
       border-radius: 20px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.2);
       overflow: hidden;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 20px auto;
     }
+    
     .card-left {
       background: linear-gradient(135deg, #2C3E50, #3498DB);
       color: white;
       padding: 30px;
       text-align: center;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
+    
     .logo {
       font-weight: 700;
       font-size: 28px;
@@ -40,77 +79,249 @@
       background: rgba(255,255,255,0.2);
       border-radius: 10px;
     }
+    
+    .profile-section {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
     .profile-img {
       width: 140px;
       height: 140px;
       border-radius: 50%;
       border: 5px solid rgba(255,255,255,0.3);
-      margin: 20px auto;
+      margin: 0 auto 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: linear-gradient(45deg, #3498DB, #2C3E50);
     }
-    .profile-img i { font-size: 70px; color: white; }
-    .card-right { padding: 30px; background: #F9F9F9; }
-    .name { font-weight: 700; font-size: 32px; color:#2C3E50; }
-    .title { color: #3498DB; font-weight: 600; margin-bottom: 20px; }
-    .contact-item { display: flex; align-items:center; margin-bottom:15px; padding:10px; background:#fff; border-radius:8px; box-shadow:0 3px 10px rgba(0,0,0,0.05); }
-    .contact-icon { width:40px; height:40px; border-radius:50%; background:#eee; display:flex; align-items:center; justify-content:center; margin-right:10px; color:#2C3E50; }
-    .qr-code { background:white; padding:10px; border-radius:10px; margin:20px auto; display:inline-block; }
-    .document-section, .gallery-section, .map-section { margin-top:30px; }
-    .document-item { display:flex; align-items:center; justify-content:space-between; background:white; padding:15px; border-radius:10px; margin-bottom:15px; box-shadow:0 5px 15px rgba(0,0,0,0.05); }
-    .view-btn { background:#3498DB; color:white; border:none; padding:8px 15px; border-radius:5px; font-size:12px; transition: all 0.3s; }
-    .view-btn:hover { background:#2C3E50; transform: translateY(-2px); }
-    .gallery-img { width:100%; border-radius:10px; transition:0.3s; cursor:pointer; height: 150px; object-fit: cover; }
-    .gallery-img:hover { transform:scale(1.05); }
-    .payment-methods img { width:60px; margin:10px; }
-    .map-container { 
-      border-radius: 10px; 
-      overflow: hidden; 
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      height: 250px;
+    
+    .profile-img i { 
+      font-size: 70px; 
+      color: white; 
     }
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
+    
+    .qr-code { 
+      background: white; 
+      padding: 10px; 
+      border-radius: 10px; 
+      margin: 20px auto; 
+      display: inline-block; 
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .social-icons a {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .social-icons a:hover {
+      background: white;
+      color: #2C3E50;
+      transform: translateY(-3px);
+    }
+    
+    .payment-section {
+      margin-top: 20px;
+    }
+    
+    .payment-methods {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .payment-methods img {
+      width: 60px;
+      height: 40px;
+      object-fit: contain;
+      border-radius: 5px;
+      background: white;
+      padding: 5px;
+    }
+    
+    .card-right { 
+      padding: 30px; 
+      background: #F9F9F9; 
+    }
+    
+    .name { 
+      font-weight: 700; 
+      font-size: 32px; 
+      color:#2C3E50; 
+      margin-bottom: 5px;
+    }
+    
+    .title { 
+      color: #3498DB; 
+      font-weight: 600; 
+      margin-bottom: 20px; 
+    }
+    
+    .contact-item { 
+      display: flex; 
+      align-items:center; 
+      margin-bottom:15px; 
+      padding:12px; 
+      background:#fff; 
+      border-radius:10px; 
+      box-shadow:0 3px 10px rgba(0,0,0,0.05); 
+    }
+    
+    .contact-icon { 
+      width:45px; 
+      height:45px; 
+      border-radius:50%; 
+      background:#eee; 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      margin-right:15px; 
+      color:#2C3E50; 
+      font-size: 18px;
+    }
+    
+    .section-title { 
+      font-weight: 700; 
+      color: #2C3E50; 
+      margin-bottom: 20px; 
+      padding-bottom: 10px; 
+      border-bottom: 2px solid #3498DB; 
+    }
+    
+    .business-hours p { 
+      margin:0; 
+      padding:8px 0; 
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .business-hours p span:first-child {
+      font-weight: 600;
+    }
+    
+    .form-control {
+      border-radius: 8px;
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+    
+    .btn {
+      border-radius: 8px;
+      padding: 12px 25px;
+      font-weight: 600;
+    }
+    
+    .btn-primary {
+      background: #3498DB;
       border: none;
     }
-    .section-title {
-      font-weight: 700;
-      color: #2C3E50;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #3498DB;
+    
+    .btn-success {
+      background: #27AE60;
+      border: none;
+    }
+    
+    @media (max-width: 768px) {
+      .business-card {
+        margin: 20px;
+      }
+      
+      .card-left, .card-right {
+        padding: 20px;
+      }
+      
+      body {
+        padding-top: 65px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="business-card container-fluid p-0">
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-id-card me-2"></i>Digitel Pro
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#hours">Business Hours</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#enquiry">Enquiry</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#feedback">Feedback</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CARD -->
+  <div class="business-card container-fluid p-0" id="home">
     <div class="row g-0">
-      <!-- LEFT SIDE -->
+      <!-- LEFT SIDE - Clean Design -->
       <div class="card-left col-md-4">
-        <div class="logo">VBIZCARD</div>
-        <div class="profile-img"><i class="fas fa-user-tie"></i></div>
-        <h2>John Anderson</h2>
-        <p>Senior Business Consultant</p>
-
-        <!-- QR Code -->
-        <div class="qr-code" id="qrcode"></div>
-        <p>Scan to visit my website</p>
-
-        <!-- Social Icons -->
-        <div class="social-icons d-flex justify-content-center gap-3 mt-3">
-          <a href="#"><i class="fab fa-facebook-f text-white fa-lg"></i></a>
-          <a href="#"><i class="fab fa-twitter text-white fa-lg"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in text-white fa-lg"></i></a>
-          <a href="#"><i class="fab fa-instagram text-white fa-lg"></i></a>
+        <div>
+          <div class="logo">Digitel Pro</div>
+          
+          <div class="profile-section">
+            <div class="profile-img">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            
+            <h2>John Anderson</h2>
+            <p>Senior Business Consultant</p>
+            
+            <!-- QR Code -->
+            <div class="qr-code" id="qrcode"></div>
+            <p>Scan to visit our website</p>
+          </div>
+          
+          <!-- Social Icons -->
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
         </div>
-
+        
         <!-- Payment Methods -->
-        <div class="payment-methods mt-4">
-          <h6 class="fw-bold">Accepted Payments</h6>
-          <div class="d-flex justify-content-center flex-wrap">
+        <div class="payment-section">
+          <h6>Accepted Payments</h6>
+          <div class="payment-methods">
             <img src="https://img.icons8.com/color/96/000000/visa.png" alt="Visa">
             <img src="https://img.icons8.com/color/96/000000/mastercard.png" alt="MasterCard">
             <img src="https://img.icons8.com/color/96/000000/amex.png" alt="Amex">
@@ -121,95 +332,91 @@
 
       <!-- RIGHT SIDE -->
       <div class="card-right col-md-8">
-        <h1 class="name">John Anderson</h1>
-        <p class="title">Senior Business Consultant</p>
-        <p>Helping companies grow revenue and expand market presence for 10+ years.</p>
+        <!-- Contact Section -->
+        <div id="contact">
+          <h1 class="name">John Anderson</h1>
+          <p class="title">Senior Business Consultant</p>
+          <p>Helping companies grow revenue and expand market presence for 10+ years.</p>
 
-        <!-- Contact Info -->
-        <div class="contact-info">
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-phone"></i></div>
-            <div>+91 9035066863</div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-            <div>john.anderson@vbizcard.com</div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-globe"></i></div>
-            <div><a href="https://vbizcard.in" target="_blank">vbizcard.in</a></div>
-          </div>
-        </div>
-
-        <!-- Documents -->
-        <div class="document-section">
-          <h5 class="section-title">Business Documents</h5>
-          <div class="document-item">
-            <span><i class="fas fa-file-pdf text-danger me-2"></i> Company Profile</span>
-            <button class="view-btn" onclick="openPdf('https://file-examples.com/storage/fe42043ddc68bdea5933232/2017/10/file-sample_150kB.pdf')">View</button>
-          </div>
-          <div class="document-item">
-            <span><i class="fas fa-file-contract text-primary me-2"></i> Service Agreement</span>
-            <button class="view-btn" onclick="openPdf('https://file-examples.com/storage/fe42043ddc68bdea5933232/2017/10/file-sample_150kB.pdf')">View</button>
-          </div>
-          <div class="document-item">
-            <span><i class="fas fa-chart-line text-success me-2"></i> Case Studies</span>
-            <button class="view-btn" onclick="openPdf('https://file-examples.com/storage/fe42043ddc68bdea5933232/2017/10/file-sample_150kB.pdf')">View</button>
-          </div>
-        </div>
-
-        <!-- Gallery -->
-        <div class="gallery-section">
-          <h5 class="section-title">Gallery</h5>
-          <div class="row g-3">
-            <div class="col-md-4">
-              <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="gallery-img" onclick="openImage(this.src)">
+          <div class="contact-info mt-4">
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-phone"></i></div>
+              <div>+91 9035066863</div>
             </div>
-            <div class="col-md-4">
-              <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="gallery-img" onclick="openImage(this.src)">
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+              <div>john.anderson@digitelpro.com</div>
             </div>
-            <div class="col-md-4">
-              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="gallery-img" onclick="openImage(this.src)">
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-globe"></i></div>
+              <div><a href="https://digitelpro.com" target="_blank">digitelpro.com</a></div>
             </div>
           </div>
         </div>
 
-        <!-- Google Maps -->
-        <div class="map-section">
-          <h5 class="section-title">Our Location</h5>
-          <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.314239382693!2d78.4481893148772!3d17.44582058804502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb90d35c2b8cbf%3A0x5f5cd703acb16d6a!2sHitech%20City%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1679299907716!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+        <!-- Business Hours Section -->
+        <div class="business-hours-section mt-5" id="hours">
+          <h5 class="section-title">Business Hours</h5>
+          <div class="business-hours">
+            <p><span>Monday - Friday:</span> <span>9:00 AM - 6:00 PM</span></p>
+            <p><span>Saturday:</span> <span>10:00 AM - 4:00 PM</span></p>
+            <p><span>Sunday:</span> <span>Closed</span></p>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- PDF Modal -->
-  <div class="modal fade" id="pdfModal" tabindex="-1">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Document Viewer</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <!-- Enquiry Now Section -->
+        <div class="enquiry-section mt-5" id="enquiry">
+          <h5 class="section-title">Enquiry Now</h5>
+          <form>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" placeholder="Enter your name">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="Enter your email">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="3" placeholder="Write your enquiry"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+          </form>
         </div>
-        <div class="modal-body p-0">
-          <iframe id="pdfViewer" src="" width="100%" height="600px" style="border:none;"></iframe>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Image Modal -->
-  <div class="modal fade" id="imageModal" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Image Preview</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body p-0 text-center">
-          <img id="modalImage" src="" class="img-fluid rounded">
+        <!-- Feedback Section -->
+        <div class="feedback-section mt-5" id="feedback">
+          <h5 class="section-title">Feedback</h5>
+          <form>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" placeholder="Enter your name">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="Enter your email">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Rating</label>
+              <select class="form-select">
+                <option selected>Choose rating</option>
+                <option>1 - Poor</option>
+                <option>2 - Fair</option>
+                <option>3 - Good</option>
+                <option>4 - Very Good</option>
+                <option>5 - Excellent</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Comments</label>
+              <textarea class="form-control" rows="3" placeholder="Write your feedback"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Submit Feedback</button>
+          </form>
         </div>
       </div>
     </div>
@@ -218,30 +425,57 @@
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Generate QR code
     document.addEventListener('DOMContentLoaded', function() {
+      // Initialize QR code
       new QRCode(document.getElementById("qrcode"), {
-        text: "https://vbizcard.in",
+        text: "https://digitelpro.com",
         width: 120,
         height: 120
       });
+      
+      // Add smooth scrolling for navigation links
+      document.querySelectorAll('.navbar-nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 70,
+              behavior: 'smooth'
+            });
+            
+            // Update active class
+            document.querySelectorAll('.navbar-nav a').forEach(link => {
+              link.classList.remove('active');
+            });
+            this.classList.add('active');
+          }
+        });
+      });
+      
+      // Update active class on scroll
+      window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('div[id]');
+        let currentSection = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 80;
+          if (pageYOffset >= sectionTop) {
+            currentSection = section.getAttribute('id');
+          }
+        });
+        
+        document.querySelectorAll('.navbar-nav a').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + currentSection) {
+            link.classList.add('active');
+          }
+        });
+      });
     });
-
-    // PDF Modal
-    function openPdf(url) {
-      // Use Google Docs viewer for better compatibility
-      const googleDocsViewer = 'https://docs.google.com/gview?embedded=true&url=';
-      document.getElementById("pdfViewer").src = googleDocsViewer + encodeURIComponent(url);
-      let pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
-      pdfModal.show();
-    }
-
-    // Image Modal
-    function openImage(src) {
-      document.getElementById("modalImage").src = src;
-      let imgModal = new bootstrap.Modal(document.getElementById('imageModal'));
-      imgModal.show();
-    }
   </script>
 </body>
 </html>
